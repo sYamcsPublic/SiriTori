@@ -1,0 +1,13 @@
+{
+  "name": "SiriTori",
+  "scope": "./",
+  "start_url": "./",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "./icon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
+}
