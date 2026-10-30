@@ -50,14 +50,26 @@ const existWord=(sheetName, word)=>{
 
 const getKanaYomitan=(text)=>{
   text = text.replace(/[\r\n\t\s]+/g, "")
-  const url = `https://yomi-tan.jp/api/yomi.php?ic=UTF-8&oc=UTF-8&k=h&n=1&t=${text}`
+  // const url = `https://yomi-tan.jp/api/yomi.php?ic=UTF-8&oc=UTF-8&k=h&n=1&t=${text}`
+  const url = `https://yomitan.harmonicom.jp/api/v2/yomi?ic=UTF8&oc=UTF8&kana=h&n=1&text=${text}`
   console.log(url)
   try {
-    return UrlFetchApp.fetch(url).getContentText().split(",")[0]
+    const resJsonTxt = UrlFetchApp.fetch(url).getContentText()
+    console.log(resJsonTxt)
+    const resJsonObj = JSON.parse(resJsonTxt)
+    console.log(resJsonObj)
+    const res = resJsonObj.yomi[0]
+    return res
+    // return UrlFetchApp.fetch(url).getContentText().split(",")[0]
   } catch(e) {
     console.log(text)
     return undefined
   }
+}
+
+const testGetkanaYomitan=()=>{
+  const res = getKanaYomitan("ラッコ")
+  console.log(res)
 }
 
 const addSheets=(word, kana, time)=>{
